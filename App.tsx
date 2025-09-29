@@ -3,7 +3,7 @@ import Header from './components/Header';
 import ProjectDataPanel from './components/ProjectDataPanel';
 import ReportPanel from './components/ReportPanel';
 import { mockTasks, mockChatActivity, mockMilestones } from './data/mockData';
-import { StatusReport, OutputFormat } from './types';
+import { StatusReport, OutputFormat, ReportingPeriod } from './types';
 import { generateStatusReport } from './services/geminiService';
 
 const getISODateString = (date: Date): string => date.toISOString().split('T')[0];
@@ -20,6 +20,7 @@ const App: React.FC = () => {
   const [startDate, setStartDate] = useState<string>(getISODateString(sevenDaysAgo));
   const [endDate, setEndDate] = useState<string>(getISODateString(today));
   const [outputFormat, setOutputFormat] = useState<OutputFormat>('bullet points');
+  const [reportingPeriod, setReportingPeriod] = useState<ReportingPeriod>('weekly');
 
   const handleGenerateReport = useCallback(async () => {
     setIsLoading(true);
@@ -33,6 +34,7 @@ const App: React.FC = () => {
         startDate,
         endDate,
         outputFormat,
+        reportingPeriod,
       });
       setReport(generatedReport);
     } catch (err) {
@@ -41,7 +43,7 @@ const App: React.FC = () => {
     } finally {
       setIsLoading(false);
     }
-  }, [startDate, endDate, outputFormat]);
+  }, [startDate, endDate, outputFormat, reportingPeriod]);
 
   return (
     <div className="min-h-screen bg-light-bg dark:bg-dark-bg text-gray-800 dark:text-gray-200 font-sans">
@@ -64,6 +66,8 @@ const App: React.FC = () => {
             setEndDate={setEndDate}
             outputFormat={outputFormat}
             setOutputFormat={setOutputFormat}
+            reportingPeriod={reportingPeriod}
+            setReportingPeriod={setReportingPeriod}
           />
         </div>
       </main>

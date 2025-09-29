@@ -1,5 +1,4 @@
-
-import { Task, ChatMessage, Milestone, TaskStatus } from '../types';
+import { Task, ChatMessage, Milestone, TaskStatus, TaskPriority } from '../types';
 
 export const mockTasks: Task[] = [
   {
@@ -7,6 +6,7 @@ export const mockTasks: Task[] = [
     title: 'Implement User Authentication Flow',
     status: TaskStatus.Completed,
     assignee: 'Alice',
+    priority: TaskPriority.High,
     comments: ['Finished ahead of schedule. All tests passing.'],
   },
   {
@@ -14,6 +14,7 @@ export const mockTasks: Task[] = [
     title: 'Design Dashboard UI/UX',
     status: TaskStatus.Completed,
     assignee: 'Bob',
+    priority: TaskPriority.Medium,
     comments: ['Initial mockups approved by stakeholders.', 'Final designs delivered.'],
   },
   {
@@ -21,6 +22,7 @@ export const mockTasks: Task[] = [
     title: 'Develop Reporting API Endpoint',
     status: TaskStatus.InProgress,
     assignee: 'Charlie',
+    priority: TaskPriority.High,
     comments: ['Making good progress. Schema defined.', 'Encountering a minor issue with DB query optimization.'],
   },
   {
@@ -28,6 +30,7 @@ export const mockTasks: Task[] = [
     title: 'Integrate with Third-Party Payment Gateway',
     status: TaskStatus.Blocked,
     assignee: 'Alice',
+    priority: TaskPriority.High,
     comments: ["We are blocked. The payment gateway's sandbox environment is down. Their support has been notified, ETA for fix is 2 days."],
   },
   {
@@ -35,6 +38,7 @@ export const mockTasks: Task[] = [
     title: 'Setup Staging Environment on AWS',
     status: TaskStatus.InProgress,
     assignee: 'David',
+    priority: TaskPriority.Medium,
     comments: ['EC2 instance is up. Working on configuring the CI/CD pipeline.'],
   },
     {
@@ -42,6 +46,7 @@ export const mockTasks: Task[] = [
     title: 'User Acceptance Testing (UAT)',
     status: TaskStatus.NotStarted,
     assignee: 'QA Team',
+    priority: TaskPriority.Low,
     comments: [],
   },
 ];

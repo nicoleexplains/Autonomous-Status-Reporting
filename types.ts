@@ -5,11 +5,18 @@ export enum TaskStatus {
   NotStarted = 'Not Started'
 }
 
+export enum TaskPriority {
+  High = 'High',
+  Medium = 'Medium',
+  Low = 'Low'
+}
+
 export interface Task {
   id: string;
   title: string;
   status: TaskStatus;
   assignee: string;
+  priority: TaskPriority;
   comments: string[];
 }
 
@@ -33,11 +40,13 @@ export interface ProjectData {
 }
 
 export type OutputFormat = 'bullet points' | 'paragraphs';
+export type ReportingPeriod = 'daily' | 'weekly';
 
 export interface GenerateReportConfig extends ProjectData {
   startDate: string;
   endDate: string;
   outputFormat: OutputFormat;
+  reportingPeriod: ReportingPeriod;
 }
 
 export enum HealthStatus {

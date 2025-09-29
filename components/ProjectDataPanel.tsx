@@ -1,6 +1,5 @@
-
 import React from 'react';
-import { Task, ChatMessage, Milestone, TaskStatus } from '../types';
+import { Task, ChatMessage, Milestone, TaskStatus, TaskPriority } from '../types';
 import Card from './Card';
 
 interface ProjectDataPanelProps {
@@ -15,6 +14,15 @@ const getStatusColor = (status: TaskStatus) => {
         case TaskStatus.InProgress: return 'bg-blue-500';
         case TaskStatus.Blocked: return 'bg-red-500';
         case TaskStatus.NotStarted: return 'bg-gray-400';
+        default: return 'bg-gray-500';
+    }
+}
+
+const getPriorityColor = (priority: TaskPriority) => {
+    switch(priority) {
+        case TaskPriority.High: return 'bg-red-500';
+        case TaskPriority.Medium: return 'bg-yellow-500';
+        case TaskPriority.Low: return 'bg-green-500';
         default: return 'bg-gray-500';
     }
 }
@@ -36,7 +44,12 @@ const ProjectDataPanel: React.FC<ProjectDataPanelProps> = ({ tasks, chatActivity
                   {task.status}
                 </span>
               </div>
-              <p className="text-sm text-gray-500 dark:text-gray-400">Assignee: {task.assignee}</p>
+              <div className="flex items-center space-x-3 mt-1">
+                <p className="text-sm text-gray-500 dark:text-gray-400">Assignee: {task.assignee}</p>
+                 <span className={`text-xs font-semibold px-2 py-0.5 rounded-full text-white ${getPriorityColor(task.priority)}`}>
+                    {task.priority}
+                </span>
+              </div>
               {task.comments.length > 0 && (
                 <div className="mt-2 text-sm text-gray-600 dark:text-gray-300 border-l-2 border-gray-300 dark:border-gray-600 pl-2">
                   {task.comments.map((comment, index) => <p key={index}>"{comment}"</p>)}

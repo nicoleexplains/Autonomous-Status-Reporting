@@ -1,5 +1,5 @@
 import React from 'react';
-import { StatusReport, OutputFormat } from '../types';
+import { StatusReport, OutputFormat, ReportingPeriod } from '../types';
 import StatusIndicator from './StatusIndicator';
 import Loader from './Loader';
 
@@ -14,6 +14,8 @@ interface ReportPanelProps {
   setEndDate: (date: string) => void;
   outputFormat: OutputFormat;
   setOutputFormat: (format: OutputFormat) => void;
+  reportingPeriod: ReportingPeriod;
+  setReportingPeriod: (period: ReportingPeriod) => void;
 }
 
 const ReportPanel: React.FC<ReportPanelProps> = ({
@@ -27,6 +29,8 @@ const ReportPanel: React.FC<ReportPanelProps> = ({
   setEndDate,
   outputFormat,
   setOutputFormat,
+  reportingPeriod,
+  setReportingPeriod,
 }) => {
 
   const commonButtonClasses = 'px-4 py-2 text-sm font-medium transition duration-150 ease-in-out focus:z-10 focus:outline-none focus:ring-2 focus:ring-brand-secondary';
@@ -51,7 +55,45 @@ const ReportPanel: React.FC<ReportPanelProps> = ({
 
       <div className="mb-6 p-4 bg-light-bg dark:bg-dark-bg rounded-lg border border-gray-200 dark:border-gray-700">
         <h3 className="text-md font-semibold text-gray-700 dark:text-gray-300 mb-3">Report Customization</h3>
-        <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+           <div>
+            <label className="block text-sm font-medium text-gray-600 dark:text-gray-400 mb-2">Reporting Period</label>
+            <div className="flex rounded-md">
+              <button
+                type="button"
+                onClick={() => setReportingPeriod('daily')}
+                className={`${commonButtonClasses} rounded-l-md ${reportingPeriod === 'daily' ? activeButtonClasses : inactiveButtonClasses}`}
+              >
+                Daily
+              </button>
+              <button
+                type="button"
+                onClick={() => setReportingPeriod('weekly')}
+                className={`${commonButtonClasses} rounded-r-md -ml-px ${reportingPeriod === 'weekly' ? activeButtonClasses : inactiveButtonClasses}`}
+              >
+                Weekly
+              </button>
+            </div>
+          </div>
+          <div>
+            <label className="block text-sm font-medium text-gray-600 dark:text-gray-400 mb-2">Output Format</label>
+            <div className="flex rounded-md">
+              <button
+                type="button"
+                onClick={() => setOutputFormat('bullet points')}
+                className={`${commonButtonClasses} rounded-l-md ${outputFormat === 'bullet points' ? activeButtonClasses : inactiveButtonClasses}`}
+              >
+                Bullets
+              </button>
+              <button
+                type="button"
+                onClick={() => setOutputFormat('paragraphs')}
+                className={`${commonButtonClasses} rounded-r-md -ml-px ${outputFormat === 'paragraphs' ? activeButtonClasses : inactiveButtonClasses}`}
+              >
+                Paragraphs
+              </button>
+            </div>
+          </div>
           <div>
             <label htmlFor="start-date" className="block text-sm font-medium text-gray-600 dark:text-gray-400 mb-2">Start Date</label>
             <input
@@ -73,25 +115,6 @@ const ReportPanel: React.FC<ReportPanelProps> = ({
               className={dateInputClasses}
               aria-label="Report end date"
             />
-          </div>
-          <div>
-            <label className="block text-sm font-medium text-gray-600 dark:text-gray-400 mb-2">Output Format</label>
-            <div className="flex rounded-md">
-              <button
-                type="button"
-                onClick={() => setOutputFormat('bullet points')}
-                className={`${commonButtonClasses} rounded-l-md ${outputFormat === 'bullet points' ? activeButtonClasses : inactiveButtonClasses}`}
-              >
-                Bullets
-              </button>
-              <button
-                type="button"
-                onClick={() => setOutputFormat('paragraphs')}
-                className={`${commonButtonClasses} rounded-r-md -ml-px ${outputFormat === 'paragraphs' ? activeButtonClasses : inactiveButtonClasses}`}
-              >
-                Paragraphs
-              </button>
-            </div>
           </div>
         </div>
       </div>

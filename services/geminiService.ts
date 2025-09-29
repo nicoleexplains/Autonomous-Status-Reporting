@@ -50,10 +50,10 @@ export const generateStatusReport = async (config: GenerateReportConfig): Promis
 
   const ai = new GoogleGenAI({ apiKey: process.env.API_KEY });
 
-  const { startDate, endDate, outputFormat, ...data } = config;
+  const { startDate, endDate, outputFormat, reportingPeriod, ...data } = config;
 
   const prompt = `
-    Analyze the following project data and generate a concise status report for the period from ${startDate} to ${endDate}.
+    Analyze the following project data and generate a concise ${reportingPeriod} status report for the period from ${startDate} to ${endDate}.
     The output for the executive summary, key accomplishments, and roadblocks/risks sections should be in ${outputFormat} format.
     The data includes tasks, recent chat messages, and project milestones.
     Identify key accomplishments, and pay close attention to comments and chat messages to identify risks and blockers.
