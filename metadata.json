@@ -1,0 +1,5 @@
+{
+  "name": "Autonomous Status Reporting",
+  "description": "An application that monitors real-time project data like task progress, chat activity, and milestones to automatically generate daily or weekly status reports, saving project managers significant time.",
+  "requestFramePermissions": []
+}
